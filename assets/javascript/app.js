@@ -14,8 +14,6 @@ firebase.initializeApp(config);
 // Create a variable to reference the database
 var database = firebase.database();
 
-// User object with currentCurrency, Buy's(make a further collection for this?), 
-
 // submit handler
 $('.submit').on('click', '.crypto', function (event) {
     event.preventDefault();
@@ -49,8 +47,6 @@ $('.submit').on('click', '.crypto', function (event) {
     $('.coin-amount').val('')
     $('.dollar-amount').val('')
 
-    // need to have database for all the firebase transactions
-    // Initialize Firebase
 });
 
 
@@ -96,8 +92,7 @@ function checkUser() {
         // if modal - $('.modal').style('display', 'name')
         location.replace('./index.html')
     }
-
-
+}
 
     // D3 implementation for handling graphs
-    // ======================================================================================
+    // =====================================================================================
