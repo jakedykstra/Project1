@@ -1,77 +1,114 @@
-// Trade history database 
-//NOTE: tradeHistory will need to be called after a onclick event occurs for buying or selling crypto
-// =============================================================================
-
 // this will all go to the top of the JS
 var config = {
-    apiKey: "AIzaSyCUa3OmzBQAV9MHxQg6Pgl2s5533V5qjEI",
+    apiKey: "AIzaSyDf-CkSTVGIUHH7egsA7gDy68T3_oxEeYU",
     authDomain: "bit-trader-project.firebaseapp.com",
     databaseURL: "https://bit-trader-project.firebaseio.com",
-    storageBucket: "bit-trader-project.appspot.com"
+    projectId: "bit-trader-project",
+    storageBucket: "bit-trader-project.appspot.com",
+    messagingSenderId: "715412835909"
 };
-//initializing the firebase application
 firebase.initializeApp(config);
 // Create a variable to reference the database
 var database = firebase.database();
+var counter = 0;
+var buy = false;
+var sell = false;
 
-// submit handler
+// =======================================================================================================
+// Transaction History
+// =======================================================================================================
+// submit handler - class crypto on each crypto currency will log the value entered. 
 $('.submit').on('click', '.crypto', function (event) {
     event.preventDefault();
+    console.log(this);
+    counter++;
 
-    // function grabs train inputs
+    // setting variables from inputs
     var coinAmount = $('.coin-amount').val().trim();
     var usdAmount = $('.dollar-amount').val().trim();
-    var cryptoType = $('.crypto').val().trim();
+    var cryptoType = $(this);
+    var user = firebase.auth().currentUser.providerData[0].uid;
+    var tradeType = $(this.data);
+    var transactionCounter = counter;
 
+    if (tradeType === "buy") {
+        buy = true;
+    } else {
+        sell = true;
+    }
 
-    // params from the variables updated when onclick buy/sell event occurs
-
+    // object to be pushed to database for 
     var tradeTransaction = {
         transactionCounter: transactionCounter,
-        crypto: cryptoType,
+        user: user,
+        tradeType: tradeType,
+        cryptoType: cryptoType,
         coinAmount: coinAmount,
         usdAmount: usdAmount
     }
 
-    database.ref().push(tradeTransaction);
+    var user = {
+        userId: user,
+        bought: {
+            cryptoType: 0
+        },
+        sold: {
+            cryptoType: 0
+        },
+        own: {
+            cryptoType: 0
+        }
+    }
+
+    database.ref('transactionTracker/').push(tradeTransaction);
+    database.ref('user/' + user).push(user);
 
     console.log(tradeTransaction);
     console.log(tradeTransaction.transactionCounter);
+    console.log(tradeTransaction.tradeType);
     console.log(tradeTransaction.coinAmount);
     console.log(tradeTransaction.usdAmount);
     console.log(tradeTransaction.cryptoType);
+    console.log(user);
+    console.log(user.userId);
 
-    alert('Purchase History Added!')
+    console.log('Purchase History Added!');
 
-    // Clears all of the text-boxes
-    $('.coin-amount').val('')
-    $('.dollar-amount').val('')
-
+    // Clears all of the text-boxes - when coin amount changes we call the usd amount 
+    $('.coin-amount').val('');
+    usdCalc();
+    // TODO: will need to change the name of all these
 });
 
 
-// 3. Create Firebase event for adding trains to the database and a row in the html when a user adds an entry
-database.ref().on('child_added', function (childSnapshot) {
+// Create Firebase event for adding transactions to the database and a row in the html when a user makes a trade
+database.ref('transactionTracker/').on('value', function (childSnapshot) {
         console.log(childSnapshot.val())
 
         // Store everything into a variable.
         var cryptoType = childSnapshot.val().cryptoType;
         var coinAmount = childSnapshot.val().coinAmount;
         var usdAmount = childSnapshot.val().usdAmount;
+        var transactionCounter = childSnapshot.val().transactionCounter;
+        var user = childSnapshot.val().user;
+        var tradeType = childSnapshot.val().tradeType;
 
-        // Employee Info
+        // Testing info
         console.log(cryptoType);
         console.log(coinAmount);
         console.log(usdAmount);
-        var transaction = 0;
-        var transactionCounter = 'user' + transaction++;
+        console.log(transactionCounter);
+        console.log(user);
+        console.log(tradeType);
 
         // Create the new row
         var newRow = $('<tr>').append(
             $('<td>').text(transactionCounter),
+            $('<td>').text(UserName),
             $('<td>').text(cryptoType),
             $('<td>').text(coinAmount),
-            $('<td>').text(usdAmount));
+            $('<td>').text(usdAmount),
+            $('<td>').text(tradeType));
 
         // Append the new row to the table
         $('.transaction-history table tbody').append(newRow)
@@ -82,17 +119,34 @@ database.ref().on('child_added', function (childSnapshot) {
     });
 
 
-// Splash page unless session storage
-// =================================================================================
+// =======================================================================================================
+// Saving Transactions to the user
+// =======================================================================================================
+var userPortfolio = firebase.database().ref('users/' + user);
+userPortfolio.on('value', function (snapshot) {
+    console.log(snapshot.val());
+    // Store everything into a variable.
+    var userId = snapshot.val().userId; 
+    var bought = snapshot.val().bought; 
+    var sold = snapshot.val().sold;
+    var own = snapshot.val().own;
 
-function checkUser() {
-    // check for session storage
-    if (localStorage.getItem()) {
-        // newUser === false;
-        // if modal - $('.modal').style('display', 'name')
-        location.replace('./index.html')
-    }
-}
+    // Testing info
+    console.log(userId);
+    console.log(bought);
+    console.log(sold);
+    console.log(own);
 
-    // D3 implementation for handling graphs
-    // =====================================================================================
+    // Create the new row
+    var newRow = $('<tr>').append(
+        $('<td>').text(own),
+        $('<td>').text(sold),
+        $('<td>').text(bought));
+
+    // Append the new row to the table
+    $('.user.port table tbody').append(newRow)
+},
+
+function (errorObject) {
+    console.log("Errors handled: " + errorObject.code);
+});
