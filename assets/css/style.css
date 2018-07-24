@@ -250,3 +250,72 @@ input {
     font-family: Roboto Condensed,sans-serif;
     border-color: #4ecca3;
 }
+
+.balances {
+    border-bottom: 5px;
+    border-bottom-style: solid;
+    border-bottom-color: #4ecca3;
+    font-size: 70%;
+}
+
+#cash {
+    color: rgb(18, 204, 18);
+    margin-left: 15px;
+    
+}
+
+#net {
+    color: yellow;
+    margin-left: 15px;
+    
+}
+
+#amount {
+    float: right;
+    margin-right: 100px;
+}
+
+#coinInvestment {
+    width: 100%;
+    height: 73.8px;
+    border-bottom: 5px;
+    border-bottom-style: solid;
+    border-bottom-color: #4ecca3;
+    display: flex;
+    align-content: center;
+    align-items: center; 
+    padding: 0;
+    
+}
+
+#investmentContainer {
+    display: block;
+}
+
+#coinInvestment img {
+    margin-left: 20px;
+}
+
+.ripple {
+    margin-left: 50px;
+    align-self: center;
+    color: #009dd6;
+}
+
+.bitcoin {
+    margin-left: 50px;
+    align-self: center;
+    color: #f1c506;
+}
+
+.litecoin {
+    margin-left: 50px;
+    align-self: center;
+    color: #bebebe;
+}
+
+.ethereum {
+    margin-left: 50px;
+    align-self: center;
+    color: #0b0b0d;
+}
