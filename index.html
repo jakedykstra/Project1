@@ -7,9 +7,13 @@
     <title>Block Trade</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/D3/d3.css">
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+    <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="./assets/D3/d3-eth.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
 </head>
 
 <body>
@@ -38,28 +42,31 @@
                 <h1>Investments</h1>
             </div>
             <div id="investmentContainer">
-            <div class="bitInvestment" id="coinInvestment">
-                <img class="bitImage" src="assets/images/bitcoin.png">
-                <h1 class="bitcoin">0 BTC / $0</h1>
+                <div class="bitInvestment" id="coinInvestment">
+                    <img class="bitImage" src="assets/images/bitcoin.png">
+                    <h1 class="bitcoin">0 BTC / $0</h1>
+                </div>
+                <div class="liteInvestment" id="coinInvestment">
+                    <img class="bitImage" src="assets/images/litecoin.png">
+                    <h1 class="litecoin">0 LTC / $0</h1>
+                </div>
+                <div class="ethereumInvestment" id="coinInvestment">
+                    <img class="bitImage" src="assets/images/ethereum.png">
+                    <h1 class="ethereum">0 ETH / $0</h1>
+                </div>
+                <div class="rippleInvestment" id="coinInvestment">
+                    <img class="bitImage" src="assets/images/ripple.png">
+                    <h1 class="ripple">0 XRP / $0</h1>
+                </div>
             </div>
-            <div class="liteInvestment" id="coinInvestment">
-                <img class="bitImage" src="assets/images/litecoin.png">
-                <h1 class="litecoin">0 LTC / $0</h1>
-            </div>
-            <div class="ethereumInvestment" id="coinInvestment">
-                <img class="bitImage" src="assets/images/ethereum.png">
-                <h1 class="ethereum">0 ETH / $0</h1>
-            </div>
-            <div class="rippleInvestment" id="coinInvestment">
-                <img class="bitImage" src="assets/images/ripple.png">
-                <h1 class="ripple">0 XRP / $0</h1>
-            </div>
-        </div>
         </div>
 
         <div id="graphContainer">
             <div class="titleTab">
                 <h1>Graph</h1>
+            </div>
+            <div id="container" class="svg-container">
+                <svg></svg>
             </div>
         </div>
 
@@ -121,6 +128,20 @@
         <div class="titleTab">
             <h1>Trade History</h1>
         </div>
+        <table class="history-table">
+            <thead>
+                <tr>
+                    <th>Transaction?</th>
+                    <th>User</th>
+                    <th>Crypto Currency</th>
+                    <th>Coin Amount</th>
+                    <th>USD Amount</th>
+                    <th>Trade Type</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
     </div>
 </body>
 
