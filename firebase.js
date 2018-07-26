@@ -1,4 +1,3 @@
-// this will all go to the top of the JS
 var config = {
     apiKey: "AIzaSyDf-CkSTVGIUHH7egsA7gDy68T3_oxEeYU",
     authDomain: "bit-trader-project.firebaseapp.com",
@@ -14,10 +13,11 @@ var counter = 0;
 var buy = false;
 var sell = false;
 
-// =======================================================================================================
-// Transaction History
-// =======================================================================================================
-// submit handler - class crypto on each crypto currency will log the value entered. 
+
+//=======================================================================
+// History 
+//=======================================================================
+
 $('.submit').on('click', '.crypto', function (event) {
     event.preventDefault();
     console.log(this);
@@ -47,17 +47,18 @@ $('.submit').on('click', '.crypto', function (event) {
         usdAmount: usdAmount
     }
 
-    var user = {
+    var userID = {
         userId: user,
-        bought: {
-            cryptoType: 0
-        },
-        sold: {
-            cryptoType: 0
-        },
-        own: {
-            cryptoType: 0
-        }
+        totalNet: 10000,
+        USD: 10000,
+        BTC: 0,
+        BTCVal: 0,
+        ETH: 0,
+        ETHVal: 0,
+        XRP: 0,
+        XRPVal: 0,
+        LTC: 0,
+        LTCVal: 0
     }
 
     database.ref('transactionTracker/').push(tradeTransaction);
@@ -119,6 +120,7 @@ database.ref('transactionTracker/').on('value', function (childSnapshot) {
     });
 
 
+    
 // =======================================================================================================
 // Saving Transactions to the user
 // =======================================================================================================
@@ -150,3 +152,73 @@ userPortfolio.on('value', function (snapshot) {
 function (errorObject) {
     console.log("Errors handled: " + errorObject.code);
 });
+
+
+// Login Page
+//=============================================================
+// User database
+// var auth = firebase.auth() // returns all methods we need to 
+// auth.signInWithEmailAndPassword(email,pass); // takes in email and password
+// auth.createUserWithEmailAndPassword(email,pass);
+
+// auth.onAuthStateChanged(firebaseUser => { }); // dont think we will need this for run 1. Simply monitors if they are logged in
+
+//grab elements
+var txtEmail = document.getElementById('textEmail');
+var txtPassword = document.getElementById('textPassword');
+var btnLogin = document.getElementById('btnLogin');
+var btnSignUp = document.getElementById('btnSignUp');
+
+// event listener
+btnLogin.addEventListener('click', e => {
+    const email = textEmail.value;
+    const pass = textPassword.value;
+    const auth = firebase.auth();
+    //Sign in
+    const promise = auth.signInWithEmailAndPassword(email, pass);
+    promise.catch(e => console.log(e.message));
+    // firebase.auth().onAuthStateChanged(firebaseUser => {
+    // if(firebaseUser) {
+    //     location.replace('../index.html');
+    // }});
+    check();
+});
+
+//signup event
+btnSignUp.addEventListener('click', e => {
+    // TODO: check for real email
+    const email = textEmail.value;
+    const pass = textPassword.value;
+    const auth = firebase.auth();
+    //create user
+    const promise = auth.createUserWithEmailAndPassword(email, pass);
+    promise.then(user => {
+        console.log(user);
+        console.log(user.ka);
+        console.log(user.ka.uid);
+        console.log(user.uid);
+        check();
+    }).catch(e => console.log(e.message));
+})
+
+//this will let us know everytime the state changes. Real time authentication state change
+firebase.auth().onAuthStateChanged(firebaseUser => {
+    if (firebaseUser) {
+        console.log(firebaseUser);
+    } else {
+        console.log('not logged in');
+    }
+});
+
+function check() {
+    var user = firebase.auth().currentUser;
+    console.log(user);
+    if (user != null) {
+        name = user.displayName;
+        email = user.email;
+        photoUrl = user.photoURL;
+        emailVerified = user.emailVerified;
+        uid = user.uid; // The user's ID, unique to the Firebase project. Do NOT use
+        // this value to authenticate with your backend server, if
+        // you have one. Use User.getToken() instead.
+    }

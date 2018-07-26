@@ -1,44 +1,148 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
-    crossorigin="anonymous">
-
-  <title>BlockTrade</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Block Trade</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/D3/d3.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="./assets/D3/d3-eth.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
 </head>
 
 <body>
-  <h1></h1>
+    <div id="headWrap" class="index-header">
+        <div>
+            <img src="assets/images/btlogo3.png">
+            <h1 id="title">
+                Portfolio
+            </h1>
+        </div>
+    </div>
+    <div id="profileContainers">
+        <div id="accountContainer">
+            <div class="titleTab">
+                <h1>Account</h1>
+            </div>
+            <div class="balances">
+                <h1 id="cash">Current Cash Balance:
+                    <span id="amount">$100,000</span>
+                </h1>
+                <h1 id="net">Portfolio Networth:
+                    <span id="amount">$100,000</span>
+                </h1>
+            </div>
+            <div class="titleTab">
+                <h1>Investments</h1>
+            </div>
+            <div id="investmentContainer">
+                <div class="bitInvestment" id="coinInvestment">
+                    <img class="bitImage" src="assets/images/bitcoin.png">
+                    <h1 class="bitcoin">0 BTC / $0</h1>
+                </div>
+                <div class="liteInvestment" id="coinInvestment">
+                    <img class="bitImage" src="assets/images/litecoin.png">
+                    <h1 class="litecoin">0 LTC / $0</h1>
+                </div>
+                <div class="ethereumInvestment" id="coinInvestment">
+                    <img class="bitImage" src="assets/images/ethereum.png">
+                    <h1 class="ethereum">0 ETH / $0</h1>
+                </div>
+                <div class="rippleInvestment" id="coinInvestment">
+                    <img class="bitImage" src="assets/images/ripple.png">
+                    <h1 class="ripple">0 XRP / $0</h1>
+                </div>
+            </div>
+        </div>
 
-  <section class="transaction-history">
-    <h3>Bit Trade Transaction History</h3>
-    <table>
-      <tr>
-        <th>Transaction Count</th>
-        <th>Crypto</th>
-        <th>Coin Amount</th>
-        <th>Currency Amount</th>
-      </tr>
-      <tbody>
+        <div id="graphContainer">
+            <div class="titleTab">
+                <h1>Graph</h1>
+            </div>
+            <div id="container" class="svg-container">
+                <svg></svg>
+            </div>
+        </div>
 
-      </tbody>
-    </table>
-  </section>
-
-
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
-    crossorigin="anonymous"></script>
+        <div id="tradeContainer">
+            <div class="titleTab">
+                <h1 class>Trades</h1>
+            </div>
+            <div id="coin" class="bitCoin">
+                <div class="priceImage">
+                    <img class="bitImage" src="assets/images/bitcoin.png">
+                    <h1 class="price">$7,751</h1>
+                </div>
+                <div class="inputFields">
+                    <input class="buy" placeholder="Buy Amount (Dollars)">
+                    <button class="buyButton">Buy</button>
+                    <input class="sell" placeholder="Sell Amount (Coins)">
+                    <button class="sellButton">Sell</button>
+                </div>
+            </div>
+            <div id="coin" class="liteCoin">
+                <div class="priceImage">
+                    <img class="bitImage" src="assets/images/litecoin.png">
+                    <h1 class="price">$82</h1>
+                </div>
+                <div class="inputFields">
+                    <input class="buy" placeholder="Buy Amount (Dollars)">
+                    <button class="buyButton">Buy</button>
+                    <input class="sell" placeholder="Sell Amount (Coins)">
+                    <button class="sellButton">Sell</button>
+                </div>
+            </div>
+            <div id="coin" class="ethereumCoin">
+                <div class="priceImage">
+                    <img class="bitImage" src="assets/images/ethereum.png">
+                    <h1 class="price">$505</h1>
+                </div>
+                <div class="inputFields">
+                    <input class="buy" placeholder="Buy Amount (Dollars)">
+                    <button class="buyButton">Buy</button>
+                    <input class="sell" placeholder="Sell Amount (Coins)">
+                    <button class="sellButton">Sell</button>
+                </div>
+            </div>
+            <div id="coin" class="rippleCoin">
+                <div class="priceImage">
+                    <img class="bitImage" src="assets/images/ripple.png">
+                    <h1 class="price">$0.44</h1>
+                </div>
+                <div class="inputFields">
+                    <input class="buy" placeholder="Buy Amount (Dollars)">
+                    <button class="buyButton">Buy</button>
+                    <input class="sell" placeholder="Sell Amount (Coins)">
+                    <button class="sellButton">Sell</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="tradeHistory">
+        <div class="titleTab">
+            <h1>Trade History</h1>
+        </div>
+        <table class="history-table">
+            <thead>
+                <tr>
+                    <th>Transaction?</th>
+                    <th>User</th>
+                    <th>Crypto Currency</th>
+                    <th>Coin Amount</th>
+                    <th>USD Amount</th>
+                    <th>Trade Type</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
 </body>
 
 </html>
