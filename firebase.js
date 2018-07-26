@@ -10,59 +10,34 @@ firebase.initializeApp(config);
 // Create a variable to reference the database
 var database = firebase.database();
 var counter = 0;
-var buy = false;
-var sell = false;
-
 
 //=======================================================================
-// History 
+// History - This will be called upon buy or sell
 //=======================================================================
 
-$('.submit').on('click', '.crypto', function (event) {
-    event.preventDefault();
+function tradeHistoryDb(cryptoType, usdAmount, coinAmount, tradeType) {
+    // event.preventDefault();
     console.log(this);
     counter++;
-
     // setting variables from inputs
-    var coinAmount = $('.coin-amount').val().trim();
-    var usdAmount = $('.dollar-amount').val().trim();
-    var cryptoType = $(this);
+    // need to change this for input's passed in
+    var coinAmount = coinAmount.val().trim();
+    var usdAmount = usdAmount.val().trim();
     var user = firebase.auth().currentUser.providerData[0].uid;
-    var tradeType = $(this.data);
     var transactionCounter = counter;
-
-    if (tradeType === "buy") {
-        buy = true;
-    } else {
-        sell = true;
-    }
 
     // object to be pushed to database for 
     var tradeTransaction = {
         transactionCounter: transactionCounter,
         user: user,
-        tradeType: tradeType,
         cryptoType: cryptoType,
         coinAmount: coinAmount,
-        usdAmount: usdAmount
+        usdAmount: usdAmount,
+        tradeType: tradeType
     }
 
-    var userID = {
-        userId: user,
-        totalNet: 10000,
-        USD: 10000,
-        BTC: 0,
-        BTCVal: 0,
-        ETH: 0,
-        ETHVal: 0,
-        XRP: 0,
-        XRPVal: 0,
-        LTC: 0,
-        LTCVal: 0
-    }
 
     database.ref('transactionTracker/').push(tradeTransaction);
-    database.ref('user/' + user).push(user);
 
     console.log(tradeTransaction);
     console.log(tradeTransaction.transactionCounter);
@@ -70,8 +45,7 @@ $('.submit').on('click', '.crypto', function (event) {
     console.log(tradeTransaction.coinAmount);
     console.log(tradeTransaction.usdAmount);
     console.log(tradeTransaction.cryptoType);
-    console.log(user);
-    console.log(user.userId);
+
 
     console.log('Purchase History Added!');
 
@@ -79,7 +53,8 @@ $('.submit').on('click', '.crypto', function (event) {
     $('.coin-amount').val('');
     usdCalc();
     // TODO: will need to change the name of all these
-});
+}
+
 
 
 // Create Firebase event for adding transactions to the database and a row in the html when a user makes a trade
@@ -122,31 +97,54 @@ database.ref('transactionTracker/').on('value', function (childSnapshot) {
 
     
 // =======================================================================================================
-// Saving Transactions to the user
+// SUser Function to DB
 // =======================================================================================================
+function dbUser() {
+
+
+    var user = {
+        userId: user,
+        totalNet: 10000,
+        USD: 10000,
+        BTC: 0,
+        BTCVal: 0,
+        ETH: 0,
+        ETHVal: 0,
+        XRP: 0,
+        XRPVal: 0,
+        LTC: 0,
+        LTCVal: 0
+    }
+
+    console.log(user);
+    console.log(user.userId);
+    database.ref('user/' + user).push(user);
+}
+
 var userPortfolio = firebase.database().ref('users/' + user);
 userPortfolio.on('value', function (snapshot) {
     console.log(snapshot.val());
     // Store everything into a variable.
     var userId = snapshot.val().userId; 
-    var bought = snapshot.val().bought; 
-    var sold = snapshot.val().sold;
-    var own = snapshot.val().own;
+    var totalNet = snapshot.val().totalNet; 
+    var USD = snapshot.val().USD;
+    var BTC = snapshot.val().BTC;
+    var BTCVal = snapshot.val().BTCVal;
+    var ETH = snapshot.val().ETH;
+    var ETHVal = snapshot.val().ETHVal;
+    var XRP = snapshot.val().XRP;
+    var XRPVal = snapshot.val().XRPVal;
+    var LTC = snapshot.val().LTC;
+    var LTCVal = snapshot.val().LTCVal;
 
     // Testing info
     console.log(userId);
-    console.log(bought);
-    console.log(sold);
-    console.log(own);
+    console.log(totalNet);
+    console.log(USD);
+    console.log(BTC);
+    console.log(BTCVal);
 
-    // Create the new row
-    var newRow = $('<tr>').append(
-        $('<td>').text(own),
-        $('<td>').text(sold),
-        $('<td>').text(bought));
-
-    // Append the new row to the table
-    $('.user.port table tbody').append(newRow)
+    // Use $ and grab sections that will need to change to db numbers
 },
 
 function (errorObject) {
@@ -222,3 +220,4 @@ function check() {
         // this value to authenticate with your backend server, if
         // you have one. Use User.getToken() instead.
     }
+}
