@@ -152,8 +152,9 @@ img {
     background: #393e46;
     margin-top: 0px;
     width: calc(100% - 83px);
-    height: 150px;
+    height: 225px;
     margin: 80px 37px; 
+    margin-bottom: 0px;
     border: 5px;
     border-style: solid;
     border-color: #4ecca3;
@@ -166,7 +167,7 @@ a {
 }
 
 #profileContainers {
-    height: 60%;
+    height: 500px;
     display: flex;
     justify-content: center;
     margin: 10px;
@@ -182,4 +183,139 @@ a {
 .titleTab h1 {
     font-size: 24x;
     margin: 0px 0px 0px 10px;
+}
+
+#coin {
+    width: 100%;
+    height: 110px;
+    border-bottom: 5px;
+    border-bottom-style: solid;
+    border-bottom-color: #4ecca3;
+    display: flex;
+    align-content: center;
+    align-items: center; 
+    padding: 0;
+}
+
+#coin img {
+    margin-left: 20px;
+    padding: 0;
+}
+
+.bitImage {
+    height: 50px;
+    width: 50px;
+}
+
+.price {
+    color: #70a800;
+}
+
+.priceImage {
+    display: flex;
+    align-items: center;
+    width: 45%;
+    float: left;
+}
+
+.inputFields {
+    width: 55%;
+    float: right;
+}
+
+input {
+    margin: 7px;
+    background-color: #393e46;
+    border-color: #4ecca3;
+    color: white;
+    text-align: center;
+}
+
+::placeholder {
+    color:white;
+    opacity: .60;
+    text-align: center;
+}
+
+.buyButton {
+    color: white;
+    background:rgb(18, 204, 18);
+    font-family: Roboto Condensed,sans-serif;
+    border-color: #4ecca3;
+}
+
+.sellButton {
+    color: white;
+    background: red;
+    font-family: Roboto Condensed,sans-serif;
+    border-color: #4ecca3;
+}
+
+.balances {
+    border-bottom: 5px;
+    border-bottom-style: solid;
+    border-bottom-color: #4ecca3;
+    font-size: 70%;
+}
+
+#cash {
+    color: rgb(18, 204, 18);
+    margin-left: 15px;
+    
+}
+
+#net {
+    color: yellow;
+    margin-left: 15px;
+    
+}
+
+#amount {
+    float: right;
+    margin-right: 100px;
+}
+
+#coinInvestment {
+    width: 100%;
+    height: 73.8px;
+    border-bottom: 5px;
+    border-bottom-style: solid;
+    border-bottom-color: #4ecca3;
+    display: flex;
+    align-content: center;
+    align-items: center; 
+    padding: 0;
+    
+}
+
+#investmentContainer {
+    display: block;
+}
+
+#coinInvestment img {
+    margin-left: 20px;
+}
+
+.ripple {
+    margin-left: 50px;
+    align-self: center;
+    color: #009dd6;
+}
+
+.bitcoin {
+    margin-left: 50px;
+    align-self: center;
+    color: #f1c506;
+}
+
+.litecoin {
+    margin-left: 50px;
+    align-self: center;
+    color: #bebebe;
+}
+
+.ethereum {
+    margin-left: 50px;
+    align-self: center;
+    color: #0b0b0d;
 }

@@ -1,59 +1,3 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        .line-chart {
-            border: 1px solid lightgray;
-        }
-
-        #graphContainer {
-            display: inline-block;
-            background: #393e46;
-            width: 40%;
-            height: 100%;
-            margin: auto;
-            margin-top: 25px;
-            border: 5px;
-            border-style: solid;
-            border-color: #4ecca3;
-        }
-
-        .svg-container {
-            display: inline-block;
-            position: relative;
-            width: 100%;
-            padding-bottom: 100%;
-            vertical-align: top;
-            overflow: hidden;
-        }
-
-        .svg-content {
-            display: inline-block;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-    </style>
-</head>
-
-<body>
-    <div id="graphContainer">
-        <div class="titleTab">
-            <h1>Graph</h1>
-            <div id="container" class="svg-container">
-                <svg viewBox="0 0 300 300" preserveAspectRatio="xMidYMid meet"></svg>
-            </div>
-        </div>
-    </div>
-
-
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script>
         // D3 implementation for handling graphs
         // =====================================================================================
         var api = 'https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=90';
@@ -92,9 +36,9 @@
                 svgHeight = 400;
             var margin = {
                 top: 20,
-                right: 20,
+                right: 10,
                 bottom: 30,
-                left: 50
+                left: 45
             };
             var width = svgWidth - margin.left - margin.right;
             var height = svgHeight - margin.top - margin.bottom;
@@ -153,7 +97,3 @@
                 .attr("stroke-width", 1.5)
                 .attr("d", line);
         }
-    </script>
-</body>
-
-</html>
