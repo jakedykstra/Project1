@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .line-chart {
+            border: 1px solid lightgray;
+        }
+
+        #graphContainer {
+            display: inline-block;
+            background: #393e46;
+            width: 40%;
+            height: 100%;
+            margin: auto;
+            margin-top: 25px;
+            border: 5px;
+            border-style: solid;
+            border-color: #4ecca3;
+        }
+
+        .svg-container {
+            display: inline-block;
+            position: relative;
+            width: 100%;
+            padding-bottom: 100%;
+            vertical-align: top;
+            overflow: hidden;
+        }
+
+        .svg-content {
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="graphContainer">
+        <div class="titleTab">
+            <h1>Graph</h1>
+            <div id="container" class="svg-container">
+                <svg viewBox="0 0 300 300" preserveAspectRatio="xMidYMid meet"></svg>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script>
+        // D3 implementation for handling graphs
+        // =====================================================================================
+        var api = 'https://min-api.cryptocompare.com/data/histoday?fsym=LTC&tsym=USD&limit=90';
+        document.addEventListener("DOMContentLoaded", function (event) {
+            fetch(api)
+                .then(function (response) {
+                    return response.json();
+                    console.log(response.json());
+                })
+                .then(function (data) {
+                    var parsedData = parseData(data)
+                    console.log(parseData);
+                    console.log(data);
+                    drawChart(parsedData);
+                })
+        });
+
+        function parseData(data) {
+            var arr = [];
+            for (var i of data.Data) {
+                arr.push({
+                    date: new Date(i.time * 1000), //date
+                    value: i.close //convert string to number
+                });
+            }
+            return arr;
+
+        }
+
+
+
+
+        function drawChart(data) {
+            console.log(data);
+            var svgWidth = 600,
+                svgHeight = 400;
+            var margin = {
+                top: 20,
+                right: 20,
+                bottom: 30,
+                left: 50
+            };
+            var width = svgWidth - margin.left - margin.right;
+            var height = svgHeight - margin.top - margin.bottom;
+            var svg = d3.select('div#container')
+                .append("svg")
+                .attr("preserveAspectRatio", "xMinYMin meet")
+                .attr("viewBox", "0 0 600 400")
+                .classed("svg-content", true);
+            //.attr("width", svgWidth)
+               // .attr("height", svgHeight);
+
+            var g = svg.append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")"
+                );
+
+            var x = d3.scaleTime().rangeRound([0, width]);
+            var y = d3.scaleLinear().rangeRound([height, 0]);
+
+            var line = d3.line()
+                .x(function (d) {
+                    return x(d.date)
+                })
+                .y(function (d) {
+                    return y(d.value)
+                })
+            x.domain(d3.extent(data, function (d) {
+                return d.date
+            }));
+            y.domain(d3.extent(data, function (d) {
+                return d.value
+            }));
+
+            g.append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x))
+                .select(".domain")
+                .remove();
+
+            g.append("g")
+                .call(d3.axisLeft(y))
+                .append("text")
+                .attr("fill", "#000")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 6)
+                .attr("dy", "0.71em")
+                .attr("text-anchor", "end")
+                .text("Price ($)");
+
+            g.append("path")
+                .datum(data)
+                .attr("fill", "none")
+                .attr("stroke", "steelblue")
+                .attr("stroke-linejoin", "round")
+                .attr("stroke-linecap", "round")
+                .attr("stroke-width", 1.5)
+                .attr("d", line);
+        }
+    </script>
+</body>
+
+</html>
