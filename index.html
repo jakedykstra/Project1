@@ -7,9 +7,14 @@
     <title>Block Trade</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/D3/d3.css">
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+    <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="assets/js/app.js"></script>
+    <script src="./assets/D3/d3-eth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+
 </head>
 
 <body>
@@ -55,7 +60,6 @@
                 <h1 class="ripple"><span id ="personRipple">0</span> XRP / $<span id="XRPVal">0</span></h1>
             </div>
         </div>
-        </div>
 
         <div id="graphContainer">
             <div class="titleTab" id="graphButtonContainer">
@@ -63,6 +67,9 @@
                 <button class="graphButton" id="graphLTC">Litecoin</button>
                 <button class="graphButton" id="graphETH">Ethereum</button>
                 <button class="graphButton" id="graphXRP">Ripple</button>
+            </div>
+            <div id="container" class="svg-container">
+                <svg></svg>
             </div>
         </div>
  
@@ -124,6 +131,20 @@
         <div class="titleTab">
             <h1>Trade History</h1>
         </div>
+        <table class="history-table">
+            <thead>
+                <tr>
+                    <th>Transaction?</th>
+                    <th>User</th>
+                    <th>Crypto Currency</th>
+                    <th>Coin Amount</th>
+                    <th>USD Amount</th>
+                    <th>Trade Type</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
     </div>
 </body>
 
