@@ -11,6 +11,7 @@ var config = {
 firebase.initializeApp(config);
 
 var database = firebase.database();
+
 var email = [];
 var password = [];
 
@@ -31,7 +32,8 @@ $("#create-account").on("click", function(event){
 });
 
 //login to existing account
-$("login").on("click", function(event){
+$("#login").on("click", function(event){
+
     event.preventDefault;
     email = $("#email-input-login").val().trim();
     password = $("#password-input-login").val().trim();
@@ -61,5 +63,3 @@ function writeUserData(userId) {
 };
 
 writeUserData();
-
-
