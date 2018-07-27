@@ -2,17 +2,26 @@ $(document).ready(function () {
     console.log("Ready");
     var bitcoinPrice;
     var ethereumPrice;
+    var litecoinPrice;
+    var ripplePrice;
     var person = {
-      USD: 10000,
+      totalNet: 100000,
+      USD: 100000,
       BTC: 0,
       BTCVal: null,
       ETH: 0,
       ETHVal: null,
+      XRP: 0,
+      XRPVal: null,
+      LTC: 0,
+      LTCVal: null,
     };
   
-    jQuery.getJSON("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH&tsyms=USD", function (data) {
+    jQuery.getJSON("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,XRP,LTC&tsyms=USD", function (data) {
       bitcoinPrice = data.RAW.BTC.USD.PRICE;
       ethereumPrice = data.RAW.ETH.USD.PRICE;
+      ripplePrice = data.RAW.LTC.USD.PRICE;
+      litecoinPrice = data.RAW.XRP.PRICE;
       console.log(data)
       console.log(bitcoinPrice);
       console.log(ethereumPrice);
@@ -76,23 +85,35 @@ $(document).ready(function () {
       console.log(person.ETHVal);
       person.BTCVal = person.BTC * bitcoinPrice;
       person.ETHVal = person.ETH * ethereumPrice;
+      person.totalNet = person.BTCVal + person.ETHVal + person.USD;
+      $("#jqueryUSD").text(person.USD.toLocaleString('en'));
+      $("#jqueryNet").text(person.totalNet.toLocaleString('en'));
+      $("#personBTC").text(person.BTC.toLocaleString('en'));
+      $("#BTCVal").text(person.BTCVal.toLocaleString('en'));
+      // $("#personLTC").text(person.LTC.toLocaleString('en'));
+      // $("LTCVal").text(person.LTCVal.toLocaleString('en'));
+      $("#personEther").text(person.ETH.toLocaleString('en'));
+      $("#ETHVal").text(person.ETHVal.toLocaleString('en'));
+      // $("#personRipple").text(person.XRP.toLocaleString('en'));
+      // $("#XRPVal").text(person.XRPVal.toLocaleString('en'));
+
       console.log("Updated Portfolio");
       console.log("Ethereum value" + person.ETHVal);
     }
   
-    $("#submit").on('click', function () {
+    $("#buyEther").on('click', function () {
       event.preventDefault();
       var amount = parseInt($("#amount-eth").val().trim());
       buyCrypto(amount, ethereumPrice);
       $("#amount-eth").val("");
     });
   
-    $("#submit2").on('click', function () {
+    $("#sellEther").on('click', function () {
       event.preventDefault();
       var amount = parseInt($('#amount-eth2').val().trim());
       sellCrypto(amount, ethereumPrice);
       $('#amount-eth2').val("");
   
-    })
+    });
   
-  })
+  });
