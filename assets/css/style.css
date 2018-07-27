@@ -355,3 +355,30 @@ input {
 #graphXRP {
     background-color: #009dd6;
 }
+
+svg {
+    width: 690px;
+}
+
+.svg-container {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    margin-left: 20px;
+}
+
+.history-table {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    border-bottom: 5px;
+    border-bottom-style: solid;
+    border-bottom-color: #4ecca3;
+    justify-content: center;
+}
+
+.history-table th {
+    width: 280px;
+    margin: auto;
+    font-weight: bold;
+}
