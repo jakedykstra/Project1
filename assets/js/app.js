@@ -1,5 +1,6 @@
 $(document).ready(function () {
     console.log("Ready");
+    console.log('decimal number test ' + 1000.00999.toFixed(2));
     var bitcoinPrice;
     var ethereumPrice;
     var litecoinPrice;
@@ -51,6 +52,7 @@ $(document).ready(function () {
       // console.log("Updated person USD: " + person.USD);
       // console.log("updated person ETH: " + person.ETH);
       reAvaluate();
+      console.log(person);
     }
   
   
@@ -87,16 +89,23 @@ $(document).ready(function () {
       person.ETHVal = person.ETH * ethereumPrice;
       person.XRPVal = person.XRP * ripplePrice;
       person.LTCVal = person.LTC * litecoinPrice;
-      person.totalNet = person.BTCVal + person.ETHVal + person.USD;
+      person.totalNet = person.BTCVal + person.ETHVal + person.USD + person.LTCVal + person.XRPVal;
 
       $("#jqueryUSD").text(person.USD.toLocaleString('en'));
       $("#jqueryNet").text(person.totalNet.toLocaleString('en'));
       $("#personBTC").text(person.BTC.toLocaleString('en'));
       $("#BTCVal").text(person.BTCVal.toLocaleString('en'));
+      $("#personLTC").text(person.LTC.toLocaleString('en'));
+      $("#LTCVal").text(person.LTCVal).toLocaleString('en');
+      $("#personEther").text(person.ETH).toLocaleString('en');
+      $("#ETHVal").text(person.ETHVal).toLocaleString('en');
+      $("#personRipple").text(person.XRP.toLocaleString('en'));
+      $("#XRPVal").text(person.XRPVal.toLocaleString('en'));
+
       // $("#personLTC").text(person.LTC.toLocaleString('en'));
       // $("LTCVal").text(person.LTCVal.toLocaleString('en'));
-      $("#personEther").text(person.ETH.toLocaleString('en'));
-      $("#ETHVal").text(person.ETHVal.toLocaleString('en'));
+      // $("#personEther").text(person.ETH.toLocaleString('en'));
+      // $("#ETHVal").text(person.ETHVal.toLocaleString('en'));
       // $("#personRipple").text(person.XRP.toLocaleString('en'));
       // $("#XRPVal").text(person.XRPVal.toLocaleString('en'));
 
@@ -130,6 +139,41 @@ $(document).ready(function () {
       var amount = parseInt($('#amount-ltc').val().trim());
       buyCrypto(amount, litecoinPrice, "LTC");
       $('#amount-ltc').val("");
+    });
+
+    $("#sellLTC").on('click', function () {
+      event.preventDefault();
+      var amount = parseInt($('#amount-ltc2').val().trim());
+      sellCrypto(amount, litecoinPrice, "LTC");
+      $('#amount-ltc2').val("");
+    });
+
+    $("#buyEther").on('click', function () {
+      event.preventDefault();
+      var amount = parseInt($('#amount-eth').val().trim());
+      buyCrypto(amount, ethereumPrice, "ETH");
+      $('#amount-eth').val("");
+    });
+
+    $("#sellEther").on('click', function () {
+      event.preventDefault();
+      var amount = parseInt($('#amount-eth2').val().trim());
+      sellCrypto(amount, ethereumPrice, "ETH");
+      $('#amount-eth2').val("");
+    });
+
+    $("#buyXRP").on('click', function () {
+      event.preventDefault();
+      var amount = parseInt($('#amount-xrp').val().trim());
+      buyCrypto(amount, ripplePrice, "XRP");
+      $('#amount-xrp').val("");
+    });
+
+    $("#sellXRP").on('click', function () {
+      event.preventDefault();
+      var amount = parseInt($('#amount-xrp2').val().trim());
+      sellCrypto(amount, ripplePrice, "XRP");
+      $('#amount-xrp2').val("");
     });
   
   });
