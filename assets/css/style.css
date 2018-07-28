@@ -375,13 +375,10 @@ svg {
 }
 
 .history-table {
-    display: flex;
-    align-items: center;
-    align-content: center;
     border-bottom: 5px;
     border-bottom-style: solid;
     border-bottom-color: #4ecca3;
-    justify-content: center;
+    width: 100%;
 }
 
 .history-table th {
