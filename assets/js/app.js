@@ -53,6 +53,10 @@ $(document).ready(function () {
       // console.log("updated person ETH: " + person.ETH);
       reAvaluate();
       console.log(person);
+      console.log(amount);
+      console.log(crypto);
+      console.log(objCrypto);
+      
     }
   
   
