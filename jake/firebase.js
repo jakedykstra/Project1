@@ -56,7 +56,7 @@ function tradeHistoryDb(cryptoType, usdAmount, coinAmount, tradeType) {
             $('<td>').text(coinAmount),
             $('<td>').text(usdAmount),
             $('<td>').text(tradeType));
-
+           
         // Append the new row to the table
         $('.body').append(newRow)
     
