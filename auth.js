@@ -196,14 +196,14 @@ $("#indexRegister").on("click", function(event){
     }).then(
         writeUserData()
     );
-
+    window.location.href='index.html';
 });
 
 //login to existing account
 $("#indexLogin").on("click", function(event){
     event.preventDefault();
-    email = $("#fireEmail").val();
-    password = $("#firePass").val();
+    email = $("input[name='uname']").val();
+    password = $("input[name='psw']").val();
     
     console.log(email);
     console.log(password);
@@ -217,6 +217,7 @@ $("#indexLogin").on("click", function(event){
     }).then(
         writeUserData()
     )
+    window.location.href='index.html';
 });
 
 //sending person variable of current user to firebase
