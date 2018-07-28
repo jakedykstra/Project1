@@ -14,7 +14,7 @@ var counter = 0;
 //=======================================================================
 // History - This will be called upon buy or sell
 //=======================================================================
-
+//amount - usd, crpto - bitcoinPrice, obj - 
 function tradeHistoryDb(cryptoType, usdAmount, coinAmount, tradeType) {
     // event.preventDefault();
     console.log(this);
