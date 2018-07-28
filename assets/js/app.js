@@ -56,6 +56,8 @@ $(document).ready(function () {
       console.log(amount);
       console.log(crypto);
       console.log(objCrypto);
+
+      tradeHistoryDb(crypto, amount, totalAmount, "Buy");
       
     }
   
@@ -179,5 +181,6 @@ $(document).ready(function () {
       sellCrypto(amount, ripplePrice, "XRP");
       $('#amount-xrp2').val("");
     });
+  
   
   });
