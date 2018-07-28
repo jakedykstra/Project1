@@ -59,7 +59,7 @@ function tradeHistoryDb(cryptoType, usdAmount, coinAmount, tradeType) {
             $('<td>').text(tradeType));
 
         // Append the new row to the table
-        $('.body').append(newRow)
+        $('.').append(newRow)
     
 
     // Clears all of the text-boxes - when coin amount changes we call the usd amount 
@@ -233,3 +233,13 @@ function tradeHistoryDb(cryptoType, usdAmount, coinAmount, tradeType) {
 //         // you have one. Use User.getToken() instead.
 //     }
 // }
+
+
+$(tab).on(click, eth, function(){
+    $(".ethGraph").style("display", "relative");
+    $()
+
+})
+
+
+//TODO: make it override - overflow hidden

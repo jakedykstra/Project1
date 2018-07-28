@@ -378,7 +378,7 @@ svg {
     border-bottom: 5px;
     border-bottom-style: solid;
     border-bottom-color: #4ecca3;
-    width: 100%;
+    width: 100%; 
 }
 
 .history-table th {
