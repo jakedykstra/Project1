@@ -15,7 +15,7 @@ var counter = 0;
 // History - This will be called upon buy or sell
 //=======================================================================
 //amount - usd, crpto - bitcoinPrice, obj - 
-function tradeHistoryDb(cryptoType, usdAmount, coinAmount, tradeType) {
+function tradeHistoryDb(coinPrice, usdAmount, coinAmount, tradeType, cryptoType) {
     // event.preventDefault();
     console.log(this);
     counter++;
@@ -55,12 +55,13 @@ function tradeHistoryDb(cryptoType, usdAmount, coinAmount, tradeType) {
             newRow.append(
             $('<td>').text(transactionCounter),
             $('<td>').text(cryptoType),
+            $('<td>').text(coinPrice),
             $('<td>').text(coinAmount),
             $('<td>').text(usdAmount),
             $('<td>').text(tradeType));
 
         // Append the new row to the table
-        $('.body').append(newRow)
+        $('.body').prepend(newRow)
     
 
     // Clears all of the text-boxes - when coin amount changes we call the usd amount 
@@ -76,10 +77,10 @@ database.ref().on('child_added', function (childSnapshot) {
 
         // Store everything into a variable.
         var cryptoType = childSnapshot.val().cryptoType;
+        var coinPrice = childSnapshot.val().coinPrice;
         var coinAmount = childSnapshot.val().coinAmount;
         var usdAmount = childSnapshot.val().usdAmount;
         var transactionCounter = childSnapshot.val().transactionCounter;
-        // var user = childSnapshot.val().user;
         var tradeType = childSnapshot.val().tradeType;
 
         // Testing info
@@ -87,20 +88,19 @@ database.ref().on('child_added', function (childSnapshot) {
         console.log(coinAmount);
         console.log(usdAmount);
         console.log(transactionCounter);
-        // console.log(user);
         console.log(tradeType);
 
         // Create the new row
         var newRow = $('<tr>').append(
             $('<td>').text(transactionCounter),
-            // $('<td>').text(UserName),
             $('<td>').text(cryptoType),
+            $('<td>').text(coinPrice),
             $('<td>').text(coinAmount),
             $('<td>').text(usdAmount),
             $('<td>').text(tradeType));
 
         // Append the new row to the table
-        $('.transaction-history table tbody').append(newRow)
+        $('.body').prepend(newRow)
     },
 
     function (errorObject) {
@@ -244,12 +244,7 @@ database.ref().on('child_added', function (childSnapshot) {
 
 
 //TODO: make it override - overflow hidden
-//TODO: make it prepend
 //TODO: make tabs work
-//TODO: change y line color
-//TODO: get database working so they populate on load
-//TODO: remove user
-//TODO: set class for rows
-//TODO: set div for them to all fall into
-//TODO: round coin-amount/have selling
+//TODO: change y line color - maybe not
+//TODO: get database working so they populate on load - fix counter!!!
 //TODO: Coin price and cryptoType updated

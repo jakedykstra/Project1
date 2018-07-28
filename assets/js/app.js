@@ -41,7 +41,7 @@ $(document).ready(function () {
         return;
       };
       var totalAmount = amount / crypto;
-
+      var cryptoType = objCrypto;
       if (amount > person.USD) {
         alert("You dont have enough");
       } else {
@@ -54,7 +54,7 @@ $(document).ready(function () {
       console.log(crypto);
       console.log(objCrypto);
 
-      tradeHistoryDb(crypto, amount, totalAmount, "Buy");
+      tradeHistoryDb(crypto, amount, totalAmount, "Buy", objCrypto);
       
     }
   
@@ -77,7 +77,7 @@ $(document).ready(function () {
         person[objCrypto] -= amount;
       };
       reAvaluate();
-      tradeHistoryDb(crypto, amount, totalAmount, "Sell");
+      tradeHistoryDb(crypto, totalAmount, amount, "Sell", objCrypto);
     };
 
     //Reavaluate
@@ -163,8 +163,4 @@ $(document).ready(function () {
       sellCrypto(amount, ripplePrice, "XRP");
       $('#amount-xrp2').val("");
     });
-<<<<<<< HEAD
-=======
-
->>>>>>> c6d1adac00dccbed536526a5c81d42dc0221c4e6
   });
