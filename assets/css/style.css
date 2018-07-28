@@ -459,3 +459,9 @@ svg {
 #emailInput {
     margin-left: 34px;
 }
+
+thead {
+    border-bottom: 5px;
+    border-bottom-style: solid;
+    border-bottom-color: #4ecca3;
+}
