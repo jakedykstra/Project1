@@ -3,7 +3,7 @@ body, html {
     margin: 0px;
     font-family: Roboto Condensed,sans-serif;
     background-color: #232931;
-
+    position: relative;
 }
 
 #splashDiv {
@@ -152,7 +152,7 @@ img {
     background: #393e46;
     margin-top: 0px;
     width: calc(100% - 83px);
-    height: 225px;
+    height: 235px;
     margin: 80px 37px; 
     margin-bottom: 0px;
     border: 5px;
@@ -273,14 +273,14 @@ input {
 }
 
 #net {
-    color: yellow;
+    color: #f1c506;
     margin-left: 15px;
     
 }
 
 #amount {
     float: right;
-    margin-right: 100px;
+    margin-right: 120px;
 }
 
 #coinInvestment {
@@ -360,8 +360,7 @@ input {
 
 #graphXRP {
     background-color: #009dd6;
-<<<<<<< HEAD
-=======
+
 }
 
 svg {
@@ -377,22 +376,16 @@ svg {
 }
 
 .history-table {
-    display: flex;
-    align-items: center;
-    align-content: center;
-    border-bottom: 5px;
-    border-bottom-style: solid;
-    border-bottom-color: #4ecca3;
-    justify-content: center;
+    width: 100%;
 }
 
 .history-table th {
+    border-bottom: 5px;
+    border-bottom-style: solid;
+    border-bottom-color: #4ecca3;
     width: 280px;
     margin: auto;
     font-weight: bold;
-<<<<<<< HEAD
->>>>>>> 5b614b315e7e939e18950fdc32e0cfe555138685
-=======
 }
 
 #loginRegister {
@@ -462,5 +455,13 @@ svg {
 
 #password {
     margin-bottom: 30px;
->>>>>>> 05bdc638fda02c9456c807e6034de29ccf1e518d
+}
+
+#emailInput {
+    margin-left: 34px;
+}
+
+td {
+    background-color: white;
+    color: black;
 }
