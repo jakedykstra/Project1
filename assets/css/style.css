@@ -137,6 +137,10 @@ img {
     border-color: #4ecca3;
 }
 
+#svg-container {
+    background: #393e46;  
+}
+
 #tradeContainer {
     display: inline-block;
     background: #393e46;
