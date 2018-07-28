@@ -85,11 +85,11 @@ $(document).ready(function () {
     //2. Updates user profile with USD value and holdings
     //3. Updates current price for coins
     function reAvaluate() {
-      person.totalNet = person.BTCVal + person.ETHVal + person.USD + person.LTCVal + person.XRPVal;
       person.BTCVal = person.BTC * bitcoinPrice;
       person.LTCVal = person.LTC * litecoinPrice;
       person.ETHVal = person.ETH * ethereumPrice;
       person.XRPVal = person.XRP * ripplePrice;
+      person.totalNet = person.BTCVal + person.ETHVal + person.USD + person.LTCVal + person.XRPVal;
 
       $("#jqueryUSD").text(person.USD.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
       $("#jqueryNet").text(person.totalNet.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
@@ -163,4 +163,8 @@ $(document).ready(function () {
       sellCrypto(amount, ripplePrice, "XRP");
       $('#amount-xrp2').val("");
     });
+<<<<<<< HEAD
+=======
+
+>>>>>>> c6d1adac00dccbed536526a5c81d42dc0221c4e6
   });
