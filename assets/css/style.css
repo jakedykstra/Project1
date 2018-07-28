@@ -152,7 +152,7 @@ img {
     background: #393e46;
     margin-top: 0px;
     width: calc(100% - 83px);
-    height: 235px;
+    height: 229px;
     margin: 80px 37px; 
     margin-bottom: 0px;
     border: 5px;
@@ -160,6 +160,7 @@ img {
     border-color: #4ecca3;
     color: white;
     text-align: center;
+    overflow: hidden;
 }
 
 #tradeHistory h1 {
