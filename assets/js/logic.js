@@ -18,9 +18,8 @@ $(document).ready(function () {
       LTC: 0,
       LTCVal: null,
     };
-//configuring and initializing firebase
+    //configuring and initializing firebase
 // Initialize Firebase
-
 var config = {
     apiKey: "AIzaSyD1cb0ZxNXTfELB_fdp_K51XO0V30l25aU",
     authDomain: "project1-9578f.firebaseapp.com",
@@ -38,7 +37,7 @@ var database = firebase.database();
 //create an account
 $("#create-account").on("click", function(event){
     event.preventDefault;
-    email = $("input[name='email']").val();
+    email = $("input[name='uname']").val();
     console.log(email)
     password = $("input[name='psw']").val();
     var userID = firebase.auth().currentUser.uid;
@@ -50,15 +49,8 @@ $("#create-account").on("click", function(event){
         console.log(errorMessage);
     
     }).then(
-        writeUserData(),
-        firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            console.log(errorCode);
-            console.log(errorMessage);
-        })
-    )
+        writeUserData()
+    );
 
 });
 
@@ -66,7 +58,7 @@ $("#create-account").on("click", function(event){
 $("#login").on("click", function(event){
 
     event.preventDefault;
-    email = $("input[name='email']").val();
+    email = $("input[name='uname']").val();
     password = $("input[name='psw']").val();
     
     console.log(email);
