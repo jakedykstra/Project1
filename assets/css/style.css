@@ -3,7 +3,7 @@ body, html {
     margin: 0px;
     font-family: Roboto Condensed,sans-serif;
     background-color: #232931;
-
+    position: relative;
 }
 
 #splashDiv {
@@ -273,14 +273,14 @@ input {
 }
 
 #net {
-    color: yellow;
+    color: #f1c506;
     margin-left: 15px;
     
 }
 
 #amount {
     float: right;
-    margin-right: 100px;
+    margin-right: 120px;
 }
 
 #coinInvestment {
@@ -457,4 +457,8 @@ svg {
 
 #password {
     margin-bottom: 30px;
+}
+
+#emailInput {
+    margin-left: 34px;
 }
