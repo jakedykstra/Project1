@@ -25,11 +25,13 @@ function tradeHistoryDb(cryptoType, usdAmount, coinAmount, tradeType) {
     // var usdAmount = usdAmount.val().trim();
     // var user = firebase.auth().currentUser.providerData[0].uid;
     var transactionCounter = counter;
+    var usdAmount = Math.round(usdAmount * 100) / 100;
+    var coinAmount = Math.round(coinAmount * 100) / 100;
 
     // object to be pushed to database for 
     var tradeTransaction = {
         transactionCounter: transactionCounter,
-        // user: user,
+        coinPrice: coinPrice,
         cryptoType: cryptoType,
         coinAmount: coinAmount,
         usdAmount: usdAmount,
@@ -52,14 +54,14 @@ function tradeHistoryDb(cryptoType, usdAmount, coinAmount, tradeType) {
             var newRow = $('<tr>');
             newRow.append(
             $('<td>').text(transactionCounter),
-            $('<td>').text("UserName"),
+            $('<td>').text("hold"),
             $('<td>').text(cryptoType),
             $('<td>').text(coinAmount),
             $('<td>').text(usdAmount),
             $('<td>').text(tradeType));
 
         // Append the new row to the table
-        $('.').append(newRow)
+        $('.body').append(newRow)
     
 
     // Clears all of the text-boxes - when coin amount changes we call the usd amount 
@@ -70,41 +72,41 @@ function tradeHistoryDb(cryptoType, usdAmount, coinAmount, tradeType) {
 
 
 // Create Firebase event for adding transactions to the database and a row in the html when a user makes a trade
-// database.ref().on('value', function (childSnapshot) {
-//         console.log(childSnapshot.val())
+database.ref().on('child_added', function (childSnapshot) {
+        console.log(childSnapshot.val())
 
-//         // Store everything into a variable.
-//         var cryptoType = childSnapshot.val().cryptoType;
-//         var coinAmount = childSnapshot.val().coinAmount;
-//         var usdAmount = childSnapshot.val().usdAmount;
-//         var transactionCounter = childSnapshot.val().transactionCounter;
-//         // var user = childSnapshot.val().user;
-//         var tradeType = childSnapshot.val().tradeType;
+        // Store everything into a variable.
+        var cryptoType = childSnapshot.val().cryptoType;
+        var coinAmount = childSnapshot.val().coinAmount;
+        var usdAmount = childSnapshot.val().usdAmount;
+        var transactionCounter = childSnapshot.val().transactionCounter;
+        // var user = childSnapshot.val().user;
+        var tradeType = childSnapshot.val().tradeType;
 
-//         // Testing info
-//         console.log(cryptoType);
-//         console.log(coinAmount);
-//         console.log(usdAmount);
-//         console.log(transactionCounter);
-//         // console.log(user);
-//         console.log(tradeType);
+        // Testing info
+        console.log(cryptoType);
+        console.log(coinAmount);
+        console.log(usdAmount);
+        console.log(transactionCounter);
+        // console.log(user);
+        console.log(tradeType);
 
-//         // Create the new row
-//         var newRow = $('<tr>').append(
-//             $('<td>').text(transactionCounter),
-//             // $('<td>').text(UserName),
-//             $('<td>').text(cryptoType),
-//             $('<td>').text(coinAmount),
-//             $('<td>').text(usdAmount),
-//             $('<td>').text(tradeType));
+        // Create the new row
+        var newRow = $('<tr>').append(
+            $('<td>').text(transactionCounter),
+            // $('<td>').text(UserName),
+            $('<td>').text(cryptoType),
+            $('<td>').text(coinAmount),
+            $('<td>').text(usdAmount),
+            $('<td>').text(tradeType));
 
-//         // Append the new row to the table
-//         $('.transaction-history table tbody').append(newRow)
-//     },
+        // Append the new row to the table
+        $('.transaction-history table tbody').append(newRow)
+    },
 
-//     function (errorObject) {
-//         console.log("Errors handled: " + errorObject.code);
-//     });
+    function (errorObject) {
+        console.log("Errors handled: " + errorObject.code);
+    });
 
 
     
@@ -235,11 +237,20 @@ function tradeHistoryDb(cryptoType, usdAmount, coinAmount, tradeType) {
 // }
 
 
-$(tab).on(click, eth, function(){
-    $(".ethGraph").style("display", "relative");
-    $()
+// $(tab).on(click, eth, function(){
+//     $(".ethGraph").style("display", "relative");
+//     $(".graph").remove()
 
-})
+// })
 
 
 //TODO: make it override - overflow hidden
+//TODO: make it prepend
+//TODO: make tabs work
+//TODO: change y line color
+//TODO: get database working so they populate on load
+//TODO: remove user
+//TODO: set class for rows
+//TODO: set div for them to all fall into
+//TODO: round coin-amount/have selling
+//TODO: Coin price and cryptoType updated

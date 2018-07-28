@@ -77,6 +77,7 @@ $(document).ready(function () {
         person[objCrypto] -= amount;
       };
       reAvaluate();
+      tradeHistoryDb(crypto, amount, totalAmount, "Sell");
     };
 
     //Reavaluate
