@@ -7,13 +7,15 @@
     <title>Block Trade</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/D3/d3.css">
+    <link rel="stylesheet" href="jake/D3/d3.css">
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-    <script src="assets/js/app.js"></script>
-    <script src="./assets/D3/d3-eth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+    <script src="jake/D3/d3-btc.js"></script>
+    <script src="jake/firebase.js"></script>
+    <script src="assets/js/app.js"></script>
+
 </head>
 
 <body>
@@ -45,6 +47,7 @@
                 <h1>Investments</h1>
             </div>
             <div id="investmentContainer">
+
                 <div class="bitInvestment" id="coinInvestment">
                     <img class="bitImage" src="assets/images/bitcoin.png">
                     <h1 class="bitcoin">
@@ -84,7 +87,6 @@
                 <button class="graphButton" id="graphXRP">Ripple</button>
             </div>
             <div id="container" class="svg-container">
-                <svg></svg>
             </div>
         </div>
 
@@ -157,7 +159,7 @@
         <table class="history-table">
             <thead>
                 <tr>
-                    <th>Transaction?</th>
+                    <th>Transaction</th>
                     <th>User</th>
                     <th>Crypto Currency</th>
                     <th>Coin Amount</th>
@@ -165,8 +167,10 @@
                     <th>Trade Type</th>
                 </tr>
             </thead>
-            <tbody>
-            </tbody>
+            <div>
+                <tbody class="body">
+                </tbody>
+            </div>
         </table>
     </div>
 </body>
