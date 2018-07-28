@@ -72,7 +72,6 @@ function drawChart(data) {
 
     g.append("g")
         .attr("transform", "translate(0," + height + ")")
-        .attr("stroke", "#4ECCA3")
         .attr("stroke-width", 1)
         .call(d3.axisBottom(x))
         .select(".domain")
@@ -81,7 +80,7 @@ function drawChart(data) {
     g.append("g")
         .call(d3.axisLeft(y))
         .append("text")
-        .attr("fill", "#4ECCA3")
+        .attr("fill", "#000")
         .attr("stroke-width", 1)
         .attr("transform", "rotate(-90)")
         .attr("y", 6)
