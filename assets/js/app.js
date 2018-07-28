@@ -1,4 +1,6 @@
 $(document).ready(function () {
+
+ 
     //Variables place holders for current prices.
     var bitcoinPrice;
     var ethereumPrice;
@@ -55,6 +57,7 @@ $(document).ready(function () {
       console.log(objCrypto);
 
       tradeHistoryDb(crypto, amount, totalAmount, "Buy", objCrypto);
+      writeUserData()
       
     }
   
@@ -78,6 +81,7 @@ $(document).ready(function () {
       };
       reAvaluate();
       tradeHistoryDb(crypto, totalAmount, amount, "Sell", objCrypto);
+      writeUserData()
     };
 
     //Reavaluate
@@ -163,4 +167,68 @@ $(document).ready(function () {
       sellCrypto(amount, ripplePrice, "XRP");
       $('#amount-xrp2').val("");
     });
+
+    //create an account
+$("#indexRegister").on("click", function(event){
+  event.preventDefault();
+  email = $("input[name='uname']").val();
+  console.log(email)
+  password = $("input[name='psw']").val();
+  var userID = firebase.auth().currentUser.uid;
+  firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(errorCode);
+      console.log(errorMessage);
+  
+  }).then(
+      writeUserData()
+  );
+  window.location.href='index.html';
+});
+
+var config = {
+  apiKey: "AIzaSyD1cb0ZxNXTfELB_fdp_K51XO0V30l25aU",
+  authDomain: "project1-9578f.firebaseapp.com",
+  databaseURL: "https://project1-9578f.firebaseio.com",
+  projectId: "project1-9578f",
+  storageBucket: "project1-9578f.appspot.com",
+  messagingSenderId: "131057147635"
+};
+
+firebase.initializeApp(config);
+  var database = firebase.database();
+
+//login to existing account
+$("#indexLogin").on("click", function(event){
+  event.preventDefault();
+  email = $("input[name='uname']").val();
+  password = $("input[name='psw']").val();
+  
+  console.log(email);
+  console.log(password);
+  firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(errorCode);
+      console.log(errorMessage);
+  
+  }).then(
+      writeUserData()
+  )
+  window.location.href='index.html';
+});
+
+//sending person variable of current user to firebase
+function writeUserData() {
+  var user = firebase.auth().currentUser;
+  var userID = user.uid;  
+  console.log(userID)
+  firebase.database().ref('users/' + userID).set({
+  person
+  });
+};
+
   });
