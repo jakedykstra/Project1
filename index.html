@@ -7,13 +7,15 @@
     <title>Block Trade</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/D3/d3.css">
+    <link rel="stylesheet" href="jake/D3/d3.css">
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-    <script src="assets/js/app.js"></script>
-    <script src="./assets/D3/d3-eth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+    <script src="jake/D3/d3-btc.js"></script>
+    <script src="jake/firebase.js"></script>
+    <script src="assets/js/app.js"></script>
+
 </head>
 
 <body>
@@ -42,23 +44,23 @@
                 <h1>Investments</h1>
             </div>
             <div id="investmentContainer">
-            <div class="bitInvestment" id="coinInvestment">
-                <img class="bitImage" src="assets/images/bitcoin.png">
+                <div class="bitInvestment" id="coinInvestment">
+                    <img class="bitImage" src="assets/images/bitcoin.png">
                 <h1 class="bitcoin"><span id ="personBTC">0</span> BTC / $<span id="BTCVal">0</span></h1>
-            </div>
-            <div class="liteInvestment" id="coinInvestment">
-                <img class="bitImage" src="assets/images/litecoin.png">
+                </div>
+                <div class="liteInvestment" id="coinInvestment">
+                    <img class="bitImage" src="assets/images/litecoin.png">
                 <h1 class="litecoin"><span id ="personLTC">0</span> LTC / $<span id="LTCVal">0</span></h1>
-            </div>
-            <div class="ethereumInvestment" id="coinInvestment">
-                <img class="bitImage" src="assets/images/ethereum.png">
+                </div>
+                <div class="ethereumInvestment" id="coinInvestment">
+                    <img class="bitImage" src="assets/images/ethereum.png">
                 <h1 class="ethereum"><span id ="personEther">0</span> ETH / $<span id="ETHVal">0</span></h1>
-            </div>
-            <div class="rippleInvestment" id="coinInvestment">
-                <img class="bitImage" src="assets/images/ripple.png">
+                </div>
+                <div class="rippleInvestment" id="coinInvestment">
+                    <img class="bitImage" src="assets/images/ripple.png">
                 <h1 class="ripple"><span id ="personRipple">0</span> XRP / $<span id="XRPVal">0</span></h1>
+                </div>
             </div>
-        </div>
         </div>
 
         <div id="graphContainer">
@@ -72,7 +74,7 @@
                 <svg></svg>
             </div>
         </div>
- 
+
         <div id="tradeContainer">
             <div class="titleTab">
                 <h1 class>Trades</h1>
@@ -83,10 +85,10 @@
                     <h1 class="price">$<span id ="jqueryBTC"></span></h1>
                 </div>
                 <div class="inputFields">
-                    <input class="buy" placeholder="Buy Amount (Dollars)">
-                    <button class="buyButton">Buy</button>
-                    <input class="sell" placeholder="Sell Amount (Coins)">
-                    <button class="sellButton">Sell</button>
+                    <input id="amount-btc" class="buy" placeholder="Buy Amount (Dollars)">
+                    <button class="buyButton" id="buybtc">Buy</button>
+                    <input id="amount-btc2" class="sell" placeholder="Sell Amount (Coins)">
+                    <button class="sellButton" id="sellbtc">Sell</button>
                 </div>
             </div>
             <div id="coin" class="liteCoin">
@@ -135,17 +137,17 @@
             <thead>
                 <tr>
                     <th>Transaction?</th>
-                    <th>User</th>
                     <th>Crypto Currency</th>
+                    <th>Coin Price</th>
                     <th>Coin Amount</th>
                     <th>USD Amount</th>
                     <th>Trade Type</th>
                 </tr>
             </thead>
-            <tbody>
-            </tbody>
+            <tbody class= "body">
+                </tbody>
         </table>
-    </div>
+            </div>
 </body>
 
 </html>

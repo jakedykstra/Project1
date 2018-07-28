@@ -1,5 +1,5 @@
 .line-chart {
-    border: 1px solid red;
+    border: 1px solid lightgray;
 }
 
 .svg-container {
@@ -17,4 +17,3 @@
     top: 0;
     left: 0;
 }
-
