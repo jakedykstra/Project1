@@ -37,12 +37,12 @@ $(document).ready(function () {
 
   function buyCrypto(amount, crypto, objCrypto) {
     if (!amount || typeof amount === 'Number') {
-      alert("Invalid Input");
+      // alert("Invalid Input");
       return;
     } else {
       var totalAmount = amount / crypto;
       if (amount > person.USD) {
-        alert("You dont have enough");
+        // alert("You dont have enough");
       } else {
         person.USD -= amount;
         person[objCrypto] += totalAmount;
@@ -65,12 +65,12 @@ $(document).ready(function () {
   function sellCrypto(amount, crypto, objCrypto) {
     console.log("sell button clicked");
     if (!amount || typeof amount === 'Number') {
-      alert("Invalid Input");
+      // alert("Invalid Input");
       return;
     } else {
       var totalAmount = amount * crypto;
       if (amount > person[objCrypto]) {
-        alert('you dont have enough');
+        // alert('you dont have enough');
       } else {
         person.USD += totalAmount;
         person[objCrypto] -= amount;
